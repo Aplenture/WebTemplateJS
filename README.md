@@ -1,1 +1,1 @@
-# WebTemplateJS
+# <my_app_name>
