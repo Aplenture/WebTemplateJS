@@ -5,13 +5,14 @@
  * License https://github.com/Aplenture/<my_app_name>/blob/main/LICENSE
  */
 
+import * as AccountWebJS from "accountwebjs";
 import * as FrontendJS from "frontendjs";
 import { IndexViewController } from "./indexViewController";
 
 export class RootViewController extends FrontendJS.ViewController {
     public readonly indexViewController = new IndexViewController();
 
-    constructor(...classes: string[]) {
+    constructor(public account: AccountWebJS.Account, ...classes: string[]) {
         super(...classes, 'root-view-controller');
     }
 

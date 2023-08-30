@@ -21,7 +21,7 @@
     },
     "homepage": "https://github.com/Aplenture/<my_app_name>#readme",
     "dependencies": {
-        "frontendjs": "github:Aplenture/FrontendJS"
+        "accountwebjs": "github:Aplenture/AccountWebJS"
     },
     "devDependencies": {
         "@types/chai": "^4.3.4",
