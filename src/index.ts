@@ -7,7 +7,7 @@
 
 import * as AccountWebJS from "accountwebjs";
 import * as FrontendJS from "frontendjs";
-import { RootViewController } from "./viewControllers";
+import { RootViewController } from "./controllers";
 
 (async function () {
     const server = new FrontendJS.Server('my_fancy_server');
