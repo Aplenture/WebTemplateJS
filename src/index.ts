@@ -10,8 +10,10 @@ import * as FrontendJS from "frontendjs";
 import { RootViewController } from "./viewControllers";
 
 (async function () {
-    const account = new AccountWebJS.Account('http://localhost:4431/');
+    const server = new FrontendJS.Server('my_fancy_server');
+    const account = new AccountWebJS.Account(server);
 
+    await FrontendJS.Router.init();
     await FrontendJS.Client.init();
 
     const config = await new FrontendJS.JSONRequest('/config.json')
@@ -21,5 +23,4 @@ import { RootViewController } from "./viewControllers";
     FrontendJS.Client.viewController.appendChild(new RootViewController(account));
 
     await FrontendJS.Client.load(config);
-    await account.init();
 })();
