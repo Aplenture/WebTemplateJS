@@ -12,11 +12,26 @@ import { IndexViewController } from "./indexViewController";
 export class RootViewController extends FrontendJS.ViewController {
     public readonly indexViewController = new IndexViewController();
 
-    constructor(public account: AccountWebJS.Account, ...classes: string[]) {
+    public readonly account = new AccountWebJS.Account();
+    public readonly server = new FrontendJS.Server('my_fancy_server', this.account);
+
+    constructor(...classes: string[]) {
         super(...classes, 'root-view-controller');
     }
 
+    public async prepare(preparer: FrontendJS.ClientPreparer): Promise<void> {
+        await this.server.prepare(preparer);
+        await super.prepare(preparer);
+    }
+
+    public async init(): Promise<void> {
+        await this.server.init();
+        await super.init();
+    }
+
     public async load(): Promise<void> {
+        await this.server.load();
+
         // unload previous route
         FrontendJS.Router.onRouteChanged.on(() => super.unload(), { listener: this });
         FrontendJS.Router.onRouteChanged.on(() => this.removeAllChildren(), { listener: this });
@@ -28,6 +43,11 @@ export class RootViewController extends FrontendJS.ViewController {
         FrontendJS.Router.onRouteChanged.on(() => super.load(), { listener: this });
 
         await super.load();
+    }
+
+    public async loaded(): Promise<void> {
+        await this.server.loaded();
+        await super.loaded();
     }
 
     public async unload(): Promise<void> {
