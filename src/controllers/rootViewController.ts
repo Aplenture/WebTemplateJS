@@ -26,11 +26,6 @@ export class RootViewController extends FrontendJS.ViewController {
 
     public async init(): Promise<void> {
         await this.server.init();
-        await super.init();
-    }
-
-    public async load(): Promise<void> {
-        await this.server.load();
 
         // unload previous route
         FrontendJS.Router.onRouteChanged.on(() => super.unload(), { listener: this });
@@ -42,17 +37,21 @@ export class RootViewController extends FrontendJS.ViewController {
         // reload changed route
         FrontendJS.Router.onRouteChanged.on(() => super.load(), { listener: this });
 
+        await super.init();
+    }
+
+    public async load(): Promise<void> {
+        await this.server.load();
         await super.load();
     }
 
-    public async loaded(): Promise<void> {
-        await this.server.loaded();
-        await super.loaded();
+    public async unload(): Promise<void> {
+        await this.server.unload();
+        await super.unload();
     }
 
-    public async unload(): Promise<void> {
-        FrontendJS.Router.onRouteChanged.off({ listener: this });
-
-        await super.unload();
+    public async start(): Promise<void> {
+        await this.server.start();
+        await super.start();
     }
 }
