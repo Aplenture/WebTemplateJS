@@ -54,6 +54,6 @@ export class RootViewController extends FrontendJS.ViewController {
         await super.start();
 
         if (!this.account.hasAccess)
-            await this.account.login('admin', 'password');
+            await FrontendJS.Client.popupViewController.pushViewController(new AccountWebJS.LoginViewController(this.account));
     }
 }
