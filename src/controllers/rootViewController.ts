@@ -10,8 +10,6 @@ import * as FrontendJS from "frontendjs";
 import { IndexViewController } from "./indexViewController";
 
 export class RootViewController extends FrontendJS.ViewController {
-    public readonly indexViewController = new IndexViewController();
-
     public readonly account = new AccountWebJS.Account();
     public readonly server = new FrontendJS.Server('my_fancy_server', this.account);
 
@@ -32,7 +30,8 @@ export class RootViewController extends FrontendJS.ViewController {
         FrontendJS.Router.onRouteChanged.on(() => this.removeAllChildren(), { listener: this });
 
         // add all routes
-        FrontendJS.Router.addRoute('index', () => this.appendChild(this.indexViewController), { listener: this });
+        FrontendJS.Router.addRoute('index', () => this.appendChild(new IndexViewController()), { listener: this });
+        // FrontendJS.Router.addRoute('my_route_name', () => this.appendChild(new MyRouteViewController()), { listener: this });
 
         // reload changed route
         FrontendJS.Router.onRouteChanged.on(() => super.load(), { listener: this });
@@ -53,5 +52,8 @@ export class RootViewController extends FrontendJS.ViewController {
     public async start(): Promise<void> {
         await this.server.start();
         await super.start();
+
+        if (!this.account.hasAccess)
+            await this.account.login('admin', 'password');
     }
 }
