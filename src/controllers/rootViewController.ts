@@ -5,12 +5,11 @@
  * License https://github.com/Aplenture/<my_app_name>/blob/main/LICENSE
  */
 
-import * as AccountWebJS from "accountwebjs";
 import * as FrontendJS from "frontendjs";
 import { IndexViewController } from "./indexViewController";
 
 export class RootViewController extends FrontendJS.ViewController {
-    public readonly account = new AccountWebJS.Account();
+    public readonly account = new FrontendJS.Account.Account();
     public readonly server = new FrontendJS.Server('my_fancy_server', this.account);
 
     constructor(...classes: string[]) {
@@ -54,6 +53,6 @@ export class RootViewController extends FrontendJS.ViewController {
         await super.start();
 
         if (!this.account.hasAccess)
-            await FrontendJS.Client.popupViewController.pushViewController(new AccountWebJS.LoginViewController(this.account));
+            await FrontendJS.Client.popupViewController.pushViewController(new FrontendJS.Account.LoginViewController(this.account));
     }
 }
