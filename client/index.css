@@ -128,7 +128,9 @@ canvas {
 }
 
 .menu-view {
-    width: 10em;
+    min-width: 8em;
+    width: min-content;
+
     height: 100%;
 }
 
@@ -138,7 +140,7 @@ canvas {
 }
 
 .view {
-    transition: all ease-in-out 150ms;
+    /* transition: all ease-in-out 150ms; */
 }
 
 .label-view {
@@ -314,8 +316,8 @@ canvas {
 .popup-view-controller .close-button-container .view {
     position: absolute;
 
-    top: -10px;
-    right: -25px;
+    top: -.6em;
+    right: -1.6em;
 
     transform: translate(-50%, -50%);
 
@@ -323,13 +325,10 @@ canvas {
     padding: 0;
     margin: 0;
 
-    min-width: 34px;
-    max-width: 34px;
+    width: 2em;
+    height: 2em;
 
-    min-height: 34px;
-    max-height: 34px;
-
-    border-width: 4px;
+    border-width: .3em;
     border-style: solid;
 }
 
@@ -338,11 +337,11 @@ canvas {
     content: " ";
     position: absolute;
     display: block;
-    width: 4px;
-    left: 15px;
-    top: 4px;
-    bottom: 4px;
-    border-radius: 2px;
+    width: .3em;
+    left: .85em;
+    top: .3em;
+    bottom: .3em;
+    border-radius: .3em;
     transform: translate(-50%, -50%);
 }
 
@@ -629,5 +628,17 @@ canvas {
 @media (orientation: portrait) {
     .menu-view-controller .menu-menu-view {
         display: none;
+    }
+}
+
+@media (max-width: 1023px) {
+    * {
+        font-size: 16px;
+    }
+}
+
+@media (min-width: 1024px) {
+    * {
+        font-size: 26px;
     }
 }
