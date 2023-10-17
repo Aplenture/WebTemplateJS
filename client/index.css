@@ -96,6 +96,14 @@ canvas {
     margin: 0;
 }
 
+.bar-view .dropbox-view {
+    width: max-content;
+}
+
+.bar-view .dropbox-view>span {
+    display: none;
+}
+
 .bar-view .label-view {
     display: table;
     text-align: center;
